@@ -1,6 +1,7 @@
 <?php
 
 class Post {
+    public $author;
     public $date;
     public $title;
     public $comment;
