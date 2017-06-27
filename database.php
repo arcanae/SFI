@@ -4,9 +4,8 @@ include_once("user.php");
 
 
 class Database {
-    public function addUser($user, $pass, $lastname, $firstname, $tel, $mail, $city, $birthday, $date, $data) {
-        $pass = md5($pass);
-        $obj = new User($user, $pass, $lastname, $firstname, $tel, $mail, $city, $birthday, $date); 
+    public function addUser($obj, $data) {
+        $obj->pass = md5($obj->pass);
         array_push($data, $obj);
         $encode = json_encode($data);
         unlink("users.json");
