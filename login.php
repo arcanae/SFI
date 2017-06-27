@@ -10,7 +10,7 @@
     <input class="logininput" type="password" name="pass">
     </fieldset>
     <fieldset>
-    <pre><a href="authPHP/sign_up.php">Create an account</a></pre>
+    <pre><a href="sign_up.php">Create an account</a></pre>
     <button id='but1' class='marg'>Sign In</button>
     </fieldset>
 </form>

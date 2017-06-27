@@ -2,7 +2,7 @@
 
 if(isset($_POST['user'])) {
 
-    $source = file_get_contents("auth.json");
+    $source = file_get_contents("users.json");
     $data = json_decode($source);
     $user = $_POST['user'];
     $user = str_replace(" ", "", $user);
@@ -11,19 +11,19 @@ if(isset($_POST['user'])) {
     $wrong = false;
     $wrong2 = false; 
     foreach ($data as $key => $value) {
-       $ver_user = htmlspecialchars($data[$key]->user);
-       $ver_pass = htmlspecialchars($data[$key]->password);
-       if (strtolower($user) === $ver_user) {
+       $ver_user = htmlspecialchars($data[$key]->username);
+       $ver_pass = htmlspecialchars($data[$key]->pass);
+       if (strtolower($user) == strtolower($ver_user)) {
             $wrong2 = true;
-            if ($pass !== $ver_pass) {
+            if ($pass != $ver_pass) {
                 echo "wrong password";
             }
 
-            if ($pass === $ver_pass) {
+            if ($pass == $ver_pass) {
                 session_start();
-                $_SESSION['user'] = strtolower($user);
+                $_SESSION['user'] = $data[$key];
                 echo "<script>";
-                echo "location.href = \"../index.php\"";
+                echo "location.href = \"index.php\"";
                 echo "</script>";
             }    
        } else {
@@ -31,7 +31,7 @@ if(isset($_POST['user'])) {
        }
     }
 
-    if ($wrong === true && $wrong2 === false) {
+    if ($wrong == true && $wrong2 == false) {
         echo "User doesn't exist";
     }
 }
