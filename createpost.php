@@ -29,7 +29,7 @@
     </select>
     <input type="submit" value="ok">
 </form>
-<form action="postcreation" method="post">
+<form action="postcreation.php" method="post">
     <?php 
         if (!isset($_POST['posttype']) OR $type == 'people') {
             echo '<label for="job">Domaine/Metier :</label>';
