@@ -17,6 +17,8 @@ class Transport extends Annonces {
     public $start;
     public $finish;
     public $seats;
+    public $day;
+    public $car;
 }
 
 class Housing extends Annonces {
