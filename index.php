@@ -9,11 +9,11 @@
 <body>
 <?php
     session_start();
- if (isset($_SESSION['user'])) {
-    include_once("logged.php");
- } else {
-    include_once("login.php"); 
- }
- ?>
+    if (isset($_SESSION['user'])) {
+       include_once("logged.php");
+    } else {
+       include_once("login.php"); 
+    }
+?>
 </body>
 </html>
