@@ -1,7 +1,7 @@
 <?php 
 
 include_once("user.php");
-
+include_once("posts.php");
 
 class Database {
     public function addUser($user, $data) {
@@ -42,6 +42,30 @@ class Database {
         } else {
             echo "<p>Note des utilisateurs : ".$user->rating."/10</p>";
         }
+    }
+
+    public function createPostFolder(){
+        mkdir("posts");
+        $array = [];
+        $array = json_encode($array);
+        $people = fopen("posts/people.json","w");
+        fwrite($people,$array);
+        fclose($people);
+        $transport = fopen("posts/transport.json","w");
+        fwrite($transport,$array);
+        fclose($transport);
+        $housing = fopen("posts/housing.json","w");
+        fwrite($housing,$array);
+        fclose($housing);
+    }
+
+    public function addPost($var, $type, $data) {
+        array_push($data, $var);
+        $encode = json_encode($data);
+        unlink("posts/".$type.".json");
+        $open = fopen("posts/".$type.".json", "w");
+        fwrite($open, $encode);
+        fclose($open);
     }
 
 }
