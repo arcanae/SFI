@@ -69,9 +69,26 @@ class Database {
     }
 
     public function showUserPosts($type,$author) {
-        $source = scandir('posts');
-        foreach($source as $file) {
-            var_dump($file);
+        $source = file_get_contents('posts/'.$type.'.json');
+        $source = json_decode($source);
+        if ($type == 'people') {
+            foreach($source as $post) {
+                if ($post->author == $author) {
+                    echo '
+                        <article>
+                            <p>Auteur : '.$post->author.'</p>
+                            <p>Metier/Domaine recherché : '.$post->job.'
+                            <p>Plages horraires : '.$post->schedule[0].' - '.$post->schedule[1];
+                            if ($post->schedule[2] != '' && $post->schedule[3] != '') {
+                                echo ' / '.$post->schedule[2].' - '.$post->schedule[3].'</p>';
+                            }
+                    echo '
+                         <p>Tarif demandé : '.$post->price.'€/h</p>
+                         <p>Commentaire de l\'annonceur : '.$post->comment.'
+                        </article>
+                    ';
+                }
+            }
         }
     }
 }

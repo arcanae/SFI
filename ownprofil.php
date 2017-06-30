@@ -35,7 +35,7 @@
         
         echo "<h3>Personnel</h3>";
 
-        $database->showUserPosts();
+        $database->showUserPosts('people', $user->username);
 
         } else {
             include_once("login.php");
