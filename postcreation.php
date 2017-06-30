@@ -37,7 +37,7 @@
 
             if ($post['type'] == 'housing'){
                 $housing = new Housing($user->username, $post['type'],$post['comment'], 
-                $post['price'],$post['housetype'], $post['cycle']
+                $post['price'],$post['housetype'], $post['cycle'], $post['address']
                 );
 
                 $source = file_get_contents("posts/housing.json");

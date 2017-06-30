@@ -71,9 +71,11 @@ class Database {
     public function showUserPosts($type,$author) {
         $source = file_get_contents('posts/'.$type.'.json');
         $source = json_decode($source);
+        $empty = true;
         if ($type == 'people') {
             foreach($source as $post) {
                 if ($post->author == $author) {
+                    $empty = false;
                     echo '
                         <article>
                             <p>Auteur : '.$post->author.'</p>
@@ -89,11 +91,15 @@ class Database {
                     ';
                 }
             }
+            if ($empty == true) {
+                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.';
+            }
         }
 
         if ($type == 'transport') {
             foreach($source as $post) {
                 if ($post->author == $author) {
+                    $empty = false;
                     echo '
                         <article>
                             <p>Auteur : '.$post->author.'</p>
@@ -108,6 +114,28 @@ class Database {
                         </article>
                     ';
                 }
+            }
+            if ($empty == true) {
+                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.';
+            }
+        }
+
+        if ($type == 'housing') {
+            foreach($source as $post) {
+                if ($post->author == $author) {
+                    $empty = false;
+                    echo '
+                        <article>
+                            <p>Auteur : '.$post->author.'</p>
+                            <p>Type de logement : '.$post->housetype.'   
+                            <p>Commentaire de l\'annonceur : '.$post->comment.'
+                            <p>Tarif demandé : '.$post->price.'€/'.$post->cycle.'/personne</p>
+                        </article>
+                    ';
+                }
+            }
+            if ($empty == true) {
+                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.';
             }
         }
     }

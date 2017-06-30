@@ -49,14 +49,16 @@ class Housing extends Post {
     public $housetype;
     public $time;
     public $cycle;
+    public $address;
 
-    public function __construct($author, $title, $comment, $price, $housetype, $cycle ){
+    public function __construct($author, $title, $comment, $price, $housetype, $cycle, $address ){
         $this->author = $author;
         $this->title = $title;
         $this->comment = $comment;
         $this->price = $price;
         $this->housetype = $housetype;
         $this->cycle = $cycle;
+        $this->address = $address;
     }
 }
 

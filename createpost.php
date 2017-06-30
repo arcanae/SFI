@@ -77,6 +77,8 @@
             echo '<input type="hidden" name="type" value="housing">';
             echo '<label for="housetype">Type de logement :</label>';
             echo '<input type="text" name="housetype">';
+            echo '<label for="address">Adresse : </label>';
+            echo '<input type="text" name="address" placeholder="ex: 69006 - Lyon 6 - 99 rue Bugeaud">';
             echo '<label for="comment">Description du logement :</label>';
             echo '<textarea name="comment"></textarea>';
             echo '<label for="price">Tarif :</label>';
@@ -86,6 +88,7 @@
             echo '    <option value="jour">Jour</option>';
             echo '    <option value="nuit">Nuit</option>';
             echo '</select>';
+            echo '/personne';
             echo '<input type="submit" value="Confirmer">';
         }
     ?>

@@ -37,9 +37,13 @@
 
         $database->showUserPosts('people', $user->username);
 
-        echo "<h3>Transport</h3>";
+        echo "<h3>Transports</h3>";
 
-        $database->showUserPosts('transport', $user->username);        
+        $database->showUserPosts('transport', $user->username);  
+
+        echo "<h3>Logements</h3>";
+
+        $database->showUserPosts('housing', $user->username);              
         } else {
             include_once("login.php");
             echo "<hr></br>Vous devez être connecté pour voir ce profil !";
