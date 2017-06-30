@@ -27,7 +27,7 @@ class Database {
         if($user->image == null) {
             echo "<img src='user-icon.jpg'>";
         } else {
-            echo "<img src='".$user->image."'>";
+            echo "<img style='width:125px;height:125px;' src='".$user->image."'>";
         }
 
         echo "<h1>".$user->username."</h1>";
@@ -68,6 +68,12 @@ class Database {
         fclose($open);
     }
 
+    public function showUserPosts($type,$author) {
+        $source = scandir('posts');
+        foreach($source as $file) {
+            var_dump($file);
+        }
+    }
 }
 
 $database = new Database;

@@ -31,10 +31,17 @@
     <h2>Mes annonces</h2>
 
     <?php 
+        echo "<a href='createpost.php'>Ajouter une annonce</a>";
+        
+        echo "<h3>Personnel</h3>";
+
+        $database->showUserPosts();
+
         } else {
             include_once("login.php");
             echo "<hr></br>Vous devez être connecté pour voir ce profil !";
         }
+
     ?>
 </body>
 </html>
