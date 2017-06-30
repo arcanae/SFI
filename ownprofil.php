@@ -37,6 +37,9 @@
 
         $database->showUserPosts('people', $user->username);
 
+        echo "<h3>Transport</h3>";
+
+        $database->showUserPosts('transport', $user->username);        
         } else {
             include_once("login.php");
             echo "<hr></br>Vous devez être connecté pour voir ce profil !";

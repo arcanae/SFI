@@ -83,8 +83,28 @@ class Database {
                                 echo ' / '.$post->schedule[2].' - '.$post->schedule[3].'</p>';
                             }
                     echo '
-                         <p>Tarif demandé : '.$post->price.'€/h</p>
-                         <p>Commentaire de l\'annonceur : '.$post->comment.'
+                            <p>Tarif demandé : '.$post->price.'€/h</p>
+                            <p>Commentaire de l\'annonceur : '.$post->comment.'
+                        </article>
+                    ';
+                }
+            }
+        }
+
+        if ($type == 'transport') {
+            foreach($source as $post) {
+                if ($post->author == $author) {
+                    echo '
+                        <article>
+                            <p>Auteur : '.$post->author.'</p>
+                            <p>Date : '.$post->date.'
+                            <h4>Trajet :</h4>
+                            <p>Départ : '.$post->start.' à '.$post->starthour.'</p>
+                            <p>Arrivé : '.$post->finish.' à '.$post->endhour.'</p>
+                            <p>Véhicule : '.$post->car.'</p>
+                            <p>Nombre de places : '.$post->seats.'
+                            <p>Tarif demandé : '.$post->price.'€</p>
+                            <p>Commentaire de l\'annonceur : '.$post->comment.'
                         </article>
                     ';
                 }
