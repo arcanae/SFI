@@ -74,7 +74,7 @@ class Database {
         $empty = true;
         if ($type == 'people') {
             foreach($source as $post) {
-                if ($post->author == $author OR $author == true) {
+                if ($post->author == $author) {
                     $empty = false;
                     echo '
                         <article>
@@ -98,7 +98,7 @@ class Database {
 
         if ($type == 'transport') {
             foreach($source as $post) {
-                if ($post->author == $author OR $author == true) {
+                if ($post->author == $author) {
                     $empty = false;
                     echo '
                         <article>
@@ -122,7 +122,7 @@ class Database {
 
         if ($type == 'housing') {
             foreach($source as $post) {
-                if ($post->author == $author OR $author == true) {
+                if ($post->author == $author) {
                     $empty = false;
                     echo '
                         <article>
