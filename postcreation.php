@@ -13,7 +13,7 @@
 
             if ($post['type'] == 'people'){
                 $people = new People($user->username, $post['type'],$post['comment'], 
-                $post['price'],$post['job'], [$post['firstschedule1'],
+                $post['price'], date("d/m/Y H:i"), $post['job'], [$post['firstschedule1'],
                 $post['firstschedule2'],$post['secondschedule1'],
                 $post['secondschedule2']]
                 );
@@ -25,7 +25,7 @@
 
             if ($post['type'] == 'transport'){
                 $transport = new Transport($user->username, $post['date'], $post['type'],
-                $post['comment'], $post['price'], $post['start'], $post['hstart'],
+                $post['comment'], $post['price'], date("d/m/Y H:i"), $post['start'], $post['hstart'],
                 $post['finish'], $post['hend'], $post['seats'], $post['car']
                 );
 
@@ -37,7 +37,7 @@
 
             if ($post['type'] == 'housing'){
                 $housing = new Housing($user->username, $post['type'],$post['comment'], 
-                $post['price'],$post['housetype'], $post['cycle'], $post['address']
+                $post['price'], date("d/m/Y H:i"), $post['housetype'], $post['cycle'], $post['address']
                 );
 
                 $source = file_get_contents("posts/housing.json");

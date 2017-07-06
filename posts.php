@@ -5,17 +5,19 @@ class Post {
     public $title;
     public $comment;
     public $price;
+    public $creationDate;
 }
 
 class People extends Post {
     public $job;  
     public $schedule;
 
-    public function __construct($author, $title, $comment, $price, $job, $schedule){
+    public function __construct($author, $title, $comment, $price, $creationDate, $job, $schedule){
         $this->author = $author;
         $this->title = $title;
         $this->comment = $comment;
         $this->price = $price;
+        $this->creationDate = $creationDate;
         $this->job = $job;
         $this->schedule = $schedule;
     }
@@ -30,12 +32,13 @@ class Transport extends Post {
     public $seats;
     public $car;
 
-    public function __construct($author, $date, $title, $comment, $price, $start, $starthour, $finish, $endhour, $seats, $car){
+    public function __construct($author, $date, $title, $comment, $price, $creationDate, $start, $starthour, $finish, $endhour, $seats, $car){
         $this->author = $author;
         $this->date = $date;
         $this->title = $title;
         $this->comment = $comment;
         $this->price = $price;
+        $this->creationDate = $creationDate;
         $this->start = $start;
         $this->starthour = $starthour;
         $this->finish = $finish;
@@ -51,11 +54,12 @@ class Housing extends Post {
     public $cycle;
     public $address;
 
-    public function __construct($author, $title, $comment, $price, $housetype, $cycle, $address ){
+    public function __construct($author, $title, $comment, $price, $creationDate, $housetype, $cycle, $address ){
         $this->author = $author;
         $this->title = $title;
         $this->comment = $comment;
         $this->price = $price;
+        $this->creationDate = $creationDate;
         $this->housetype = $housetype;
         $this->cycle = $cycle;
         $this->address = $address;

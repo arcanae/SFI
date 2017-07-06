@@ -9,11 +9,14 @@
 <body>
 <?php
     session_start();
+    include_once("database.php");
     if (isset($_SESSION['user'])) {
        include_once("logged.php");
     } else {
        include_once("login.php"); 
     }
-?>
+
+    $database->showLastPosts();
+?>    
 </body>
 </html>
