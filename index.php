@@ -16,7 +16,12 @@
        include_once("login.php"); 
     }
 
-    $database->showLastPosts();
+    if(is_dir("posts")) {
+        $database->showLastPosts();
+    } else {
+        echo "Pas de nouvelles annonces.";
+    }
+
 ?>    
 </body>
 </html>
