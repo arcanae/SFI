@@ -1,5 +1,4 @@
 header {
-    height: 10vh;
     background-color: lightgray;
     display: flex;
 }
@@ -8,11 +7,20 @@ header>* {
     margin: auto 0 auto 0;
 }
 
-header>div>a {
+nav {
+    margin-left: 5%;
+}
+
+header>nav>a {
     font-size: 2em;
 }
 
 header>div>span {
     font-size: 2em;
     margin-right: 10px;
+}
+
+#logo {
+    width: 70%;
+    padding: 10px 0 10px 0;
 }
