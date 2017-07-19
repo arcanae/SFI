@@ -19,34 +19,38 @@ if(isset($_POST['user'])) {
         if ($return['error'] == false) {
             if ($return['createfile'] != false){
             $data = $database->createUsersFile();
-            } else {
-                $source = file_get_contents("users.json");
-                $data = json_decode($source);
             }
             $database->addUserSQL($obj);
-            echo 'created';
         }
     }
 
     function verifErrorSQL($obj) {
         $continue = true;
         $createFile = true;        
+        $db = new PDO('mysql:host=localhost;dbname=mysql','kiwi','banane');
+
+        $sql = 'SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "SFI"';
+
+        $req = $db->query($sql);
         if ($obj->username == "") {
         echo "Entrer un nom d'utilisateur";
         exit();
-        } 
-        
-        elseif (is_file("users.json")) {
-            $source = file_get_contents("users.json");
-            $data = json_decode($source);
-            foreach ($data as $key => $value) {
-                $ver_user = htmlspecialchars($data[$key]->username);
+        }
+         
+        elseif ($req->fetch() != false) {
+            $db = new PDO('mysql:host=localhost;dbname=SFI','kiwi','banane');
+            
+            $sql = 'SELECT * FROM user;';
+            $req = $db->query($sql); 
+            while($data = $req->fetch()) {
+                $ver_user = htmlspecialchars($data['username']);
                 if (strtolower($obj->username) == strtolower($ver_user)) {
                     echo "Ce pseudo est déjà utilisé";
                     exit();
                     $continue = false;
                 }
             }
+            $db = null;
             $createFile = false;
             $continue = true;
         }

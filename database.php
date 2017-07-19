@@ -4,23 +4,38 @@ include_once("user.php");
 include_once("posts.php");
 
 class Database {
-    public function addUser($user, $data) {
-        $user->pass = md5($user->pass);
-        array_push($data, $user);
-        $encode = json_encode($data);
-        unlink("users.json");
-        $open = fopen("users.json", "w");
-        fwrite($open, $encode);
-        fclose($open);
-    }
+    // public function addUser($user, $data) {
+    //     $user->pass = md5($user->pass);
+    //     array_push($data, $user);
+    //     $encode = json_encode($data);
+    //     unlink("users.json");
+    //     $open = fopen("users.json", "w");
+    //     fwrite($open, $encode);
+    //     fclose($open);
+    //}
 
-    public function createUsersFile() {
-        $create = fopen("users.json", "w");
-        fwrite($create, json_encode([]));
-        fclose($create);
-        $source = file_get_contents("users.json");
-        $data = json_decode($source);
-        return $data;
+    public function createDatabase() {
+        $db = new PDO('mysql:host=localhost;dbname=mysql','kiwi','banane');
+        
+        $sql = 'CREATE DATABASE SFI';
+        $req = $db->exec($sql);
+        $db = null;
+        
+        $db = new PDO('mysql:host=localhost;dbname=SFI','kiwi','banane');        
+        
+        $sql = 'CREATE TABLE user(id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(16), pass VARCHAR(32), lastname VARCHAR(32), firstname VARCHAR(32), tel INT, mail VARCHAR(64), city VARCHAR(64), birthday DATE, image BLOB, date DATE, rating INT, voter INT);';
+        $req = $db->exec($sql);
+
+        $sql = 'CREATE TABLE people(id INT PRIMARY KEY AUTO_INCREMENT, author VARCHAR(16), title VARCHAR(32), comment VARCHAR(512), price INT, creationdate VARCHAR(32), job VARCHAR(32), schedule VARCHAR(32), scdschedule VARCHAR(32), user_id INT, FOREIGN KEY (user_id) REFERENCES user(id));';
+        $req = $db->exec($sql);
+
+        $sql = 'CREATE TABLE transport(id INT PRIMARY KEY AUTO_INCREMENT, author VARCHAR(16), title VARCHAR(32), comment VARCHAR(512), price INT, creationdate VARCHAR(32), date DATE, start VARCHAR(64), starthour VARCHAR(16), finish VARCHAR(64), endhour VARCHAR(16), seats INT, car VARCHAR(32), user_id INT, FOREIGN KEY (user_id) REFERENCES user(id));';
+        $req = $db->exec($sql);
+
+        $sql = 'CREATE TABLE housing(id INT PRIMARY KEY AUTO_INCREMENT, author VARCHAR(16), title VARCHAR(32), comment VARCHAR(512), price INT, creationdate VARCHAR(32), housetype VARCHAR(64), time INT, cycle BOOLEAN, adress VARCHAR(256), user_id INT, FOREIGN KEY (user_id) REFERENCES user(id))';        
+        $req = $db->exec($sql);
+
+        $db = null;
     }
 
     public function addUserSQL($user) {
