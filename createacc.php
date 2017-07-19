@@ -23,7 +23,8 @@ if(isset($_POST['user'])) {
                 $source = file_get_contents("users.json");
                 $data = json_decode($source);
             }
-            $database->addUser($obj, $data);
+            $database->addUser2($obj);
+            echo 'created';
         }
     }
 
