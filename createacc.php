@@ -15,7 +15,7 @@ if(isset($_POST['user'])) {
     $obj->username = str_replace(" ", "", $obj->username);
 
     function createAcc($obj, $database) {
-        $return = verifError($obj);
+        $return = verifErrorSQL($obj);
         if ($return['error'] == false) {
             if ($return['createfile'] != false){
             $data = $database->createUsersFile();
@@ -23,12 +23,12 @@ if(isset($_POST['user'])) {
                 $source = file_get_contents("users.json");
                 $data = json_decode($source);
             }
-            $database->addUser2($obj);
+            $database->addUserSQL($obj);
             echo 'created';
         }
     }
 
-    function verifError($obj) {
+    function verifErrorSQL($obj) {
         $continue = true;
         $createFile = true;        
         if ($obj->username == "") {

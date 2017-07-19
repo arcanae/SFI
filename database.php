@@ -23,12 +23,13 @@ class Database {
         return $data;
     }
 
-    public function addUser2($user) {
+    public function addUserSQL($user) {
         try {
             $db = new PDO('mysql:host=localhost;dbname=SFI','kiwi','banane');
             $sql = 'INSERT INTO user(username,pass,lastname,firstname,tel,mail,city,birthday,date) VALUES ("'.$user->username.'","'.md5($user->pass).'","'.$user->lastname.'","'.$user->firstname.'",'.$user->tel.',"'.$user->mail.'","'.$user->city.'","'.$user->birthday.'","'.date('d/m/Y').'");'; 
             echo $sql;
             $req = $db->exec($sql); 
+            $db = null;
         } catch (PDOException $exception) {
             echo $exception->getMessage();
         }
