@@ -42,7 +42,6 @@ class Database {
         try {
             $db = new PDO('mysql:host=localhost;dbname=SFI','kiwi','banane');
             $sql = 'INSERT INTO user(username,pass,lastname,firstname,tel,mail,city,birthday,date) VALUES ("'.$user->username.'","'.md5($user->pass).'","'.$user->lastname.'","'.$user->firstname.'",'.$user->tel.',"'.$user->mail.'","'.$user->city.'","'.$user->birthday.'","'.date('d/m/Y').'");'; 
-            echo $sql;
             $req = $db->exec($sql); 
             $db = null;
         } catch (PDOException $exception) {
@@ -51,39 +50,24 @@ class Database {
     }
 
     public function userInfoProfile($user) {
-        if($user->image == null) {
+        if($user['image'] == null) {
             echo "<img src='user-icon.jpg'>";
         } else {
-            echo "<img style='width:125px;height:125px;' src='".$user->image."'>";
+            echo "<img style='width:125px;height:125px;' src='".$user['image']."'>";
         }
 
-        echo "<h1>".$user->username."</h1>";
-        echo "<h2>".$user->lastname." ".$user->firstname."</h2>";
-        echo "<p>Date de naissance : ".$user->birthday."</p>";
-        echo "<p>Habite : ".$user->city."</p>";
-        echo "<p>Tel : ".$user->tel."</p>";
-        echo "<p>Mail : ".$user->mail."</p>";
-        echo "<p>Inscrit depuis le : ".$user->date."</p>";
-        if($user->rating == null){
+        echo "<h1>".$user['username']."</h1>";
+        echo "<h2>".$user['lastname']." ".$user['firstname']."</h2>";
+        echo "<p>Date de naissance : ".$user['birthday']."</p>";
+        echo "<p>Habite : ".$user['city']."</p>";
+        echo "<p>Tel : ".$user['tel']."</p>";
+        echo "<p>Mail : ".$user['mail']."</p>";
+        echo "<p>Inscrit depuis le : ".$user['date']."</p>";
+        if($user['rating'] == null){
             echo "<p>Note des utilisateurs : Pas encore noté.";
         } else {
-            echo "<p>Note des utilisateurs : ".$user->rating."/10</p>";
+            echo "<p>Note des utilisateurs : ".$user['rating']."/10</p>";
         }
-    }
-
-    public function createPostFolder(){
-        mkdir("posts");
-        $array = [];
-        $array = json_encode($array);
-        $people = fopen("posts/people.json","w");
-        fwrite($people,$array);
-        fclose($people);
-        $transport = fopen("posts/transport.json","w");
-        fwrite($transport,$array);
-        fclose($transport);
-        $housing = fopen("posts/housing.json","w");
-        fwrite($housing,$array);
-        fclose($housing);
     }
 
     public function addPost($var, $type, $data) {
@@ -119,7 +103,7 @@ class Database {
                 }
             }
             if ($empty == true) {
-                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.';
+                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.</p>';
             }
         }
 
@@ -143,7 +127,7 @@ class Database {
                 }
             }
             if ($empty == true) {
-                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.';
+                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.</p>';
             }
         }
 
@@ -162,7 +146,7 @@ class Database {
                 }
             }
             if ($empty == true) {
-                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.';
+                echo '<p>L\'utilisateur n\'a pas d\'annonces dans ce domaine.</p>';
             }
         }
     }

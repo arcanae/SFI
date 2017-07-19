@@ -18,10 +18,15 @@ if(isset($_POST['user'])) {
         $return = verifErrorSQL($obj);
         if ($return['error'] == false) {
             if ($return['createfile'] != false){
-            $data = $database->createUsersFile();
+            $data = $database->createDatabase();
             }
             $database->addUserSQL($obj);
         }
+        session_start();
+        $_SESSION['user'] = $data;
+        echo "<script>";
+        echo "location.href = \"index.php\"";
+        echo "</script>";
     }
 
     function verifErrorSQL($obj) {
