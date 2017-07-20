@@ -14,7 +14,7 @@
     <title>
     <?php 
         if(isset($_SESSION['user'])) {
-            echo "Profil de ".$user->username;
+            echo "Profil de ".$user['username'];
         } else {
             echo "Page de profil";
         }

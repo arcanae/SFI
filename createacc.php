@@ -23,10 +23,13 @@ if(isset($_POST['user'])) {
             $database->addUserSQL($obj);
         }
         session_start();
+        $db = new PDO ('mysql:host=localhost;dbname=SFI','kiwi','banane');
+        $req = $db->prepare('SELECT * FROM user WHERE username=:user');
+        $req->bindValue('user', $obj->username, PDO::PARAM_STR);
+        $req->execute();
+        $data = $req->fetch();
         $_SESSION['user'] = $data;
-        echo "<script>";
-        echo "location.href = \"index.php\"";
-        echo "</script>";
+        header("location:index.php");
     }
 
     function verifErrorSQL($obj) {
@@ -95,3 +98,4 @@ if(isset($_POST['user'])) {
 }
 
 ?>
+

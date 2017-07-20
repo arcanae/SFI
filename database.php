@@ -23,7 +23,7 @@ class Database {
         
         $db = new PDO('mysql:host=localhost;dbname=SFI','kiwi','banane');        
         
-        $sql = 'CREATE TABLE user(id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(16), pass VARCHAR(32), lastname VARCHAR(32), firstname VARCHAR(32), tel INT, mail VARCHAR(64), city VARCHAR(64), birthday DATE, image BLOB, date DATE, rating INT, voter INT);';
+        $sql = 'CREATE TABLE user(id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(16), pass VARCHAR(32), lastname VARCHAR(32), firstname VARCHAR(32), tel INT, mail VARCHAR(64), city VARCHAR(64), birthday DATE, image BLOB, date VARCHAR(16), rating INT, voter INT);';
         $req = $db->exec($sql);
 
         $sql = 'CREATE TABLE people(id INT PRIMARY KEY AUTO_INCREMENT, author VARCHAR(16), title VARCHAR(32), comment VARCHAR(512), price INT, creationdate VARCHAR(32), job VARCHAR(32), schedule VARCHAR(32), scdschedule VARCHAR(32), user_id INT, FOREIGN KEY (user_id) REFERENCES user(id));';
