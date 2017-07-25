@@ -70,13 +70,31 @@ class Database {
         }
     }
 
-    public function addPost($var, $type, $data) {
-        array_push($data, $var);
-        $encode = json_encode($data);
-        unlink("posts/".$type.".json");
-        $open = fopen("posts/".$type.".json", "w");
-        fwrite($open, $encode);
-        fclose($open);
+    public function addPostSQL($obj, $type) {
+        try {
+            $db = new PDO('mysql:host=localhost;dbname=SFI','kiwi','banane');
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = 'SELECT id FROM user WHERE username ="'.$obj->author.'"';
+            $req = $db->query($sql);
+            $id = $req->fetch()['id'];
+            echo $id;
+            if ($type === 'people') {
+                echo 'p';
+                $sql = 'INSERT INTO people(author,title,comment,price,creationdate,job,schedule,scdschedule,user_id) VALUES ("'.$obj->author.'","'.$obj->title.'","'.$obj->comment.'","'.$obj->price.'","'.$obj->creationDate.'","'.$obj->job.'","'.$obj->schedule[0].'-'.$obj->schedule[1].'","'.$obj->schedule[2].'-'.$obj->schedule[3].'",'.$id.');'; 
+            } elseif ($type === 'transport') {
+                echo 't';
+                $sql = 'INSERT INTO transport(author,title,comment,price,creationdate,date,start,starthour,finish,endhour,seats,car,user_id) VALUES ("'.$obj->author.'","'.$obj->title.'","'.$obj->comment.'","'.$obj->price.'","'.$obj->creationDate.'","'.$obj->date.'","'.$obj->start.'","'.$obj->starthour.'","'.$obj->finish.'","'.$obj->endhour.'","'.$obj->seats.'","'.$obj->car.'",'.$id.');';             
+            } elseif ($type === 'housing'){
+                echo 'h';
+                $sql = 'INSERT INTO housing(author,title,comment,price,creationdate,housetype,cycle,address,user_id) VALUES ("'.$obj->author.'","'.$obj->title.'","'.$obj->comment.'","'.$obj->price.'","'.$obj->creationDate.'","'.$obj->housetype.'","'.$obj->cycle.'","'.$obj->address.'",'.$id.');';                 
+            }
+            $req = $db->exec($sql); 
+            var_dump($sql);
+            echo 'great';
+            $db = null;
+        } catch (PDOException $exception) {
+            echo $exception->getMessage();
+        }
     }
 
     public function showUserPosts($type,$author) {
